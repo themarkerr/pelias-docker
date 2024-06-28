@@ -47,7 +47,8 @@
     "targets": {
       "auto_discover": false,
       "layers_by_source": { "markerr-properties": ["address"] }
-    }
+    },
+    "exposeInternalDebugTools": true
   },
   "imports": {
     "adminLookup": {
@@ -111,12 +112,7 @@
     "whosonfirst": {
       "datapath": "/data/whosonfirst",
       "importPostalcodes": true,
-      "countryCode": "US",
-      "importPlace": [
-        "85688513",
-        "85688623",
-        "85977539"
-      ]
+      "countryCode": "US"
     },
     "transit": {
       "datapath": "/data/transit",
