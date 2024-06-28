@@ -45,7 +45,8 @@
       "focus.point.lon": -122.67
     },
     "targets": {
-      "auto_discover": true
+      "auto_discover": false,
+      "layers_by_source": { "markerr-properties": ["address"] }
     }
   },
   "imports": {
