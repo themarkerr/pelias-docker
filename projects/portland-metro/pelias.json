@@ -62,12 +62,7 @@
     "csv": {
       "datapath": "/data/csv",
       "files": [
-        "clark.csv",
-        "example.csv",
-        "clark-alt.csv",
-        "markerr-properties.csv",
-        "markerr-properties-v2.csv",
-        "property-details-000000000000.csv"
+        "part-00000-tid-972018486886628156-65da39de-eb2d-4431-ac6a-cd4cf7239759-0-1-c000.csv"
       ],
       "download": [
         "https://raw.githubusercontent.com/pelias/csv-importer/master/data/example.csv"
