@@ -47,7 +47,8 @@
     "targets": {
       "auto_discover": false,
       "layers_by_source": { "markerr-properties": ["address"] }
-    }
+    },
+    "exposeInternalDebugTools": true
   },
   "imports": {
     "adminLookup": {
@@ -61,12 +62,7 @@
     "csv": {
       "datapath": "/data/csv",
       "files": [
-        "clark.csv",
-        "example.csv",
-        "clark-alt.csv",
-        "markerr-properties.csv",
-        "markerr-properties-v2.csv",
-        "property-details-000000000000.csv"
+        "part-00000-tid-972018486886628156-65da39de-eb2d-4431-ac6a-cd4cf7239759-0-1-c000.csv"
       ],
       "download": [
         "https://raw.githubusercontent.com/pelias/csv-importer/master/data/example.csv"
@@ -111,12 +107,7 @@
     "whosonfirst": {
       "datapath": "/data/whosonfirst",
       "importPostalcodes": true,
-      "countryCode": "US",
-      "importPlace": [
-        "85688513",
-        "85688623",
-        "85977539"
-      ]
+      "countryCode": "US"
     },
     "transit": {
       "datapath": "/data/transit",
