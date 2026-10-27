@@ -9,11 +9,13 @@ updates:
       - "/images/elasticsearch/7.5.1"
       - "/images/elasticsearch/8.12.2-beta"
       - "/images/valhalla"
+    target-branch: "dev"
     schedule:
       interval: "weekly"
       day: "monday"
   - package-ecosystem: "github-actions"
     directory: "/"
+    target-branch: "dev"
     schedule:
       interval: "weekly"
       day: "monday"
