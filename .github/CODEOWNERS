@@ -1,0 +1,9 @@
+# CODEOWNERS for pelias-docker
+#
+# Code owners are auto-requested as reviewers and required to approve
+# PRs touching their files. Branch protection enforces 1 owner review.
+#
+# Setup: 2026-05-08, see Linear project
+# https://linear.app/markerr/project/enforce-codeowners-and-branch-protection-303d5ac928b4
+
+* @themarkerr/data-pipeline-owners
