@@ -1,0 +1,52 @@
+---
+name: Review notify
+
+# When GitHub requests a review from a team (CODEOWNERS does this when a PR opens), post the PR to that
+# shared #review-requests Slack channel with its members @mentioned. Same pattern as the Slack post in release.yml:
+# OpenBao bot token -> shared action in themarkerr/reusable-workflows. A Slack problem never fails the job.
+# Setup and caveats: reusable-workflows docs/REVIEW-NOTIFICATIONS.md.
+on:
+  pull_request:
+    types: [review_requested]
+
+permissions:
+  contents: read
+  id-token: write # OpenBao JWT login
+
+jobs:
+  notify:
+    name: Post review request to Slack
+    # Individual-reviewer requests have no team (no channel). Forks get no OIDC token, so skip them too.
+    # The rollout branch that added this file is skipped so its own PR does not post.
+    if: >-
+      github.event.requested_team != null
+      && github.event.pull_request.head.repo.full_name == github.repository
+      && github.head_ref != 'ci/add-review-notify'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch the Slack bot token from OpenBao (optional)
+        id: vault-slack
+        continue-on-error: true
+        uses: hashicorp/vault-action@v3
+        with:
+          url: https://vault.markerr.com
+          namespace: markerr
+          method: jwt
+          role: github-actions
+          jwtGithubAudience: https://vault.markerr.com
+          ignoreNotFound: true
+          exportEnv: false
+          secrets: |
+            secret/data/markerr/ci/shared SLACK_BOT_TOKEN_RELEASE | SLACK_BOT_TOKEN_RELEASE
+
+      - name: Post to Slack
+        continue-on-error: true
+        uses: themarkerr/reusable-workflows/.github/actions/review-notify@develop
+        with:
+          team: ${{ github.event.requested_team.slug }}
+          pr-number: ${{ github.event.pull_request.number }}
+          pr-title: ${{ github.event.pull_request.title }}
+          pr-url: ${{ github.event.pull_request.html_url }}
+          pr-author: ${{ github.event.pull_request.user.login }}
+          repo: ${{ github.repository }}
+          slack-bot-token: ${{ steps.vault-slack.outputs.SLACK_BOT_TOKEN_RELEASE }}
