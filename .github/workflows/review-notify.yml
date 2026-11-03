@@ -1,0 +1,19 @@
+---
+name: Review notify
+
+# Posts a team review request to #review-requests in Slack once a PR has the "ready for review" label and
+# its CI is green. Logic lives in themarkerr/reusable-workflows (docs/REVIEW-NOTIFICATIONS.md); this file
+# only supplies the trigger GitHub requires in each repo.
+on:
+  pull_request:
+    types: [labeled]
+
+permissions:
+  contents: read
+  checks: read
+  statuses: read
+  id-token: write # OpenBao JWT login (a called workflow can only use what the caller grants)
+
+jobs:
+  notify:
+    uses: themarkerr/reusable-workflows/.github/workflows/review-notify.yml@develop
